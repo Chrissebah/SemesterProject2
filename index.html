@@ -8,39 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="HTML, CSS, Javascript">
     <meta name="author" content="Christian Sellie Grøtan">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-e5zsmMvXG9POyBZRfZ6qLJXt1BfPTpgvihH8IeH2J5p3w4WOk70F9kI6NrMH1H+X"
         crossorigin="anonymous">
     <title>Welcome!</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
 </head>
 
-<body>
+<body class="d-flex flex-column">
 
     <header>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark"> 
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -52,32 +36,30 @@
                 </div>
             </div>
         </nav>
-
     </header>
 
+
     <main class="container mt-4">
-
         <h1 class="display-4 fw-bold text-center">Welcome to The Auction House</h1>
-
-        <div id="hero-section" class="mt-4 text-center">
-            <img src="/images/social-network-icons.gif" alt="Hero GIF" class="img-fluid">
+        <div id="" class="text-center">
+            <img src="" alt="Hero GIF" class="img-fluid">
         </div>
-
-        <div class="home-description mt-4 text-center">
-            <h2 class="display-6">What are we?</h2>
+        <div class="text-center">
+            <h2 class="h4">What are we?</h2>
             <p class="lead">Welcome to The Auction House.</p>
         </div>
-
         <div class="mt-4 text-center">
-            <button id="loginButton" class="btn btn-primary btn-lg me-2">Login</button>
-            <button id="registerButton" class="btn btn-secondary btn-lg">Register</button>
+            <button id="loginButton" class="btn btn-primary">Login</button>
+            <button id="registerButton" class="btn btn-primary">Register</button>
         </div>
-
+        <div class="mt-4 text-center">
+            <button id="continueButton" class="btn btn-secondary">Continue without logging in</button>
+        </div>
     </main>
 
-    <footer class="mt-4 bg-light text-center">
-        <nav class="navbar navbar-light">
-            <div class="container-fluid">
+    <footer class="mt-4">
+        <nav class="navbar navbar-light bg-dark"> 
+            <div class="container">
                 <span class="navbar-text">
                     The Auction House Ltd.
                 </span>
@@ -85,10 +67,9 @@
         </nav>
     </footer>
 
-
-     <!-- Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-   
+
     <script>
         // Get references to the buttons
         const loginButton = document.getElementById('loginButton');
