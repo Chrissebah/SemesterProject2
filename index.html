@@ -8,74 +8,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="HTML, CSS, Javascript">
     <meta name="author" content="Christian Sellie Grøtan">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-e5zsmMvXG9POyBZRfZ6qLJXt1BfPTpgvihH8IeH2J5p3w4WOk70F9kI6NrMH1H+X"
-        crossorigin="anonymous">
     <title>Welcome!</title>
 </head>
 
-<body class="d-flex flex-column">
+<body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark"> 
+        <nav>
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" id="hamburger">
+                    ☰
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="nav-ul" id="nav-ul">
+                    <li class="nav-item"><a href="#">Home</a></li>
+                </ul>
             </div>
         </nav>
     </header>
 
+    <main>
+        <h1>Welcome to The Auction House</h1>
+        <div id="hero-section">
+            <img src="" alt="Hero GIF">
+        </div>
+        <div class="home-description">
+            <h2>What are we?</h2>
+            <p>Welcome to The Auction House.</p>
+        </div>
+        <div>
+            <button id="loginButton">Login</button>
+            <button id="registerButton">Register</button>
+        </div>
 
-    <main class="container mt-4">
-        <h1 class="display-4 fw-bold text-center">Welcome to The Auction House</h1>
-        <div id="" class="text-center">
-            <img src="" alt="Hero GIF" class="img-fluid">
-        </div>
-        <div class="text-center">
-            <h2 class="h4">What are we?</h2>
-            <p class="lead">Welcome to The Auction House.</p>
-        </div>
-        <div class="mt-4 text-center">
-            <button id="loginButton" class="btn btn-primary">Login</button>
-            <button id="registerButton" class="btn btn-primary">Register</button>
-        </div>
         <div class="mt-4 text-center">
             <button id="continueButton" class="btn btn-secondary">Continue without logging in</button>
         </div>
     </main>
 
-    <footer class="mt-4">
-        <nav class="navbar navbar-light bg-dark"> 
-            <div class="container">
-                <span class="navbar-text">
-                    The Auction House Ltd.
-                </span>
-            </div>
-        </nav>
+    </main>
+
+    <footer>
+        <div class="container">
+            The Auction House Ltd.
+        </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // Get references to the buttons
         const loginButton = document.getElementById('loginButton');
         const registerButton = document.getElementById('registerButton');
+        const continueButton = document.getElementById('continueButton');
 
-        // Add click event listeners to the buttons
         loginButton.addEventListener('click', () => {
             // Redirect to the login page
             window.location.href = 'login.html';
@@ -84,6 +72,11 @@
         registerButton.addEventListener('click', () => {
             // Redirect to the register page
             window.location.href = 'register.html';
+        });
+
+        continueButton.addEventListener('click', () => {
+            // Redirect to the content page
+            window.location.href = 'homepage.html';
         });
     </script>
 

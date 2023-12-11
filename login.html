@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The homepage on the site">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login Page for access to The Auction House.">
+    <meta name="keywords" content="HTML, CSS, Javascript">
+    <meta name="author" content="Christian Sellie Grøtan">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/login.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="card-title">Login</h1>
+                        </div>
+                        <div class="card-body">
+                            <form id="loginForm" method="POST">
+                                <!-- Email Input -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <!-- Password Input -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                                </div>
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+
+    <script>
+        const userAccessToken = data.accessToken;
+        localStorage.setItem('jwtToken', userAccessToken);
+        </script>
+
+</body>
+</html>
