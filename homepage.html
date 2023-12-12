@@ -10,6 +10,7 @@
     <meta name="author" content="Christian Sellie Grøtan">
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/app.js" defer></script>
+    <script src="js/credits.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap" rel="stylesheet">
     <title>Homepage</title>
 </head>
@@ -17,20 +18,21 @@
 <header>
     <nav>
         <div class="container">
-            <button class="navbar-toggler" id="hamburger">
-                ☰
-            </button>
-            <ul class="nav-ul" id="nav-ul">
-                <li class="nav-item"><a href="#">Home</a></li>
-            </ul>
+            <button class="navbar-toggler" id="hamburger">☰</button>
+            <div class="buttons-container">
+                <ul class="nav-ul" id="nav-ul">
+                    <li class="nav-item"><a href="#">Home</a></li>
+                </ul>
+            </div>
+            <div id="credits-container" class="credits-container"></div>
         </div>
     </nav>
 </header>
 
 <body>
     <div id="auctionListings"></div>
+    <button id="loadMoreButton">Load More</button>
 
-    <script src="app.js"></script>
 </body>
 
 
