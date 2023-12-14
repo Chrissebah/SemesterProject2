@@ -1,44 +1,59 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const authForm = document.getElementById('authForm');
+// register.js
 
-    authForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission
+const emailInput = document.getElementById('email');
+const emailError = document.getElementById('email-error');
+const authForm = document.getElementById('authForm');
 
-        // Collect form data
-        const formData = new FormData(authForm);
-        const userData = {};
-        formData.forEach((value, key) => {
-            userData[key] = value;
-        });
+authForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        // Send a POST request to register the user
-        fetch('https://api.noroff.dev/api/v1/auction/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response (data contains the JWT or error messages)
-            if (data.token) {
-                // Registration successful, you can store the JWT and redirect the user
-                console.log('Registration successful. JWT:', data.token);
-                // Example: redirect to the content page
-                window.location.href = 'homepage.html';
+    const emailValue = emailInput.value.trim();
+    if (!emailValue.includes('@noroff') && !emailValue.includes('@stud.noroff')) {
+        emailError.style.display = 'block';
+        return; // Stop if invalid email
+    } else {
+        emailError.style.display = 'none';
+
+        const username = document.getElementById('name').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            // Object for user inputted values
+            const userData = {
+                name: username,
+                email: emailValue,
+                password: password,
+            };
+
+            // Console logs to help diagnose issues
+            console.log('Sending POST request to:', 'https://api.noroff.dev/api/v1/auction/auth/register');
+            console.log('Request method:', 'POST');
+
+            // Make a POST request to the registration endpoint
+            const response = await fetch('https://api.noroff.dev/api/v1/auction/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            if (response.ok) {
+                // Registration successful
+                const data = await response.json();
+                const jwtToken = data.token;
+
+                // Save the JWT token to localStorage
+                localStorage.setItem('jwtToken', jwtToken);
+
+                // Redirect to the login page
+                window.location.href = 'login.html';
             } else {
-                // Registration failed, handle errors
-                console.error('Registration failed:', data.message);
-                // Example: display an error message to the user
-                alert('Registration failed. Please check your information and try again.');
+                // Registration failed, handle the error
+                console.error('Registration failed');
             }
-        })
-        .catch(error => {
-            // Handle any network errors
-            console.error('Network error:', error);
-            // Example: display a generic error message to the user
-            alert('An unexpected error occurred. Please try again later.');
-        });
-    });
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    }
 });
