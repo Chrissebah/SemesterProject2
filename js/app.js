@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if there are listings to display
         if (listings && listings.length > 0) {
             const listingsHTML = listings.map(listing => `
-                <div class="auction-item">
-                    <h3>${listing.title}</h3>
-                    <p>${listing.description}</p>
-                    <p>Current Bid: ${listing.currentBid}</p>
-                    <hr>
-                </div>
+                <a href="auction-details.html?id=${listing.id}" class="auction-item-link">
+                    <div class="auction-item">
+                        <h3>${listing.title}</h3>
+                        <p>${listing.description}</p>
+                        <p>Current Bids: ${listing._count.bids}</p>
+                        <hr>
+                    </div>
+                </a>
             `).join('');
 
             auctionListingsContainer.innerHTML = listingsHTML;
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             loadMoreButton.style.display = listings.length === itemsPerPage ? 'block' : 'none';
         } else {
             auctionListingsContainer.innerHTML = '<p>No auction listings available.</p>';
-            
+
             // Reset to the first page when no more items to load
             currentPage = 1;
         }

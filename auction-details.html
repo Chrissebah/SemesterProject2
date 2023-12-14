@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Auction Details Page">
+    <meta name="keywords" content="HTML, CSS, Javascript">
+    <meta name="author" content="Your Name">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Auction Details</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <button class="navbar-toggler" id="hamburger">☰</button>
+                <div class="buttons-container">
+                    <ul class="nav-ul" id="nav-ul">
+                        <li class="nav-item"><a href="homepage.html">Home</a></li>
+                    </ul>
+                </div>
+                <div id="credits-container" class="credits-container"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auction-details-container" id="auctionDetails">
+            
+            
+        </div>
+    </main>
+
+    <footer class="mt-4">
+        <nav class="navbar navbar-light bg-dark"> 
+            <div class="container">
+                <span class="navbar-text">
+                    The Auction House Ltd.
+                </span>
+            </div>
+        </nav>
+    </footer>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const auctionDetailsContainer = document.getElementById('auctionDetails');
+
+    // Function to display auction details
+function displayAuctionDetails(auction) {
+    if (auction) {
+        const detailsHTML = `
+            <h1>${auction.title}</h1>
+            <p>Images:</p>
+            <div class="image-container">
+                ${auction.media.map(imageUrl => `<img src="${imageUrl}" alt="Auction Image">`).join('')}
+            </div>
+            <p>Description: ${auction.description}</p>
+            <p>Current Bid: ${auction.currentBid}</p>
+            <p>Created: ${auction.created}</p>
+            <p>Updated: ${auction.updated}</p>
+            <p>Ends At: ${auction.endsAt}</p>
+            <p>Bids: ${auction._count.bids}</p>`;
+
+            auctionDetailsContainer.innerHTML = detailsHTML;
+        } else {
+            auctionDetailsContainer.innerHTML = '<p>No auction details available.</p>';
+        }
+    }
+
+    // Get the auction ID from the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const auctionId = urlParams.get('id');
+
+    if (auctionId) {
+        // Fetch data for the specified auction ID
+        const apiUrl = `https://api.noroff.dev/api/v1/auction/listings/${auctionId}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => displayAuctionDetails(data))
+            .catch(error => console.error('Error fetching data:', error));
+    } else {
+        auctionDetailsContainer.innerHTML = '<p>No auction ID specified.</p>';
+    }
+});
+    </script>
+
+</body>
+
+</html>
