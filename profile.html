@@ -4,17 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Homepage of The Network. Login or register.">
+    <meta name="description" content="Your profile here on The Auction House.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="HTML, CSS, Javascript">
     <meta name="author" content="Christian Sellie Grøtan">
     <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/profile.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap"
         rel="stylesheet">
     <title>Your Profile</title>
 </head>
-
-<body>
 
     <header>
         <nav>
@@ -22,7 +21,7 @@
                 <button class="navbar-toggler" id="hamburger">☰</button>
                 <div class="buttons-container">
                     <ul class="nav-ul" id="nav-ul">
-                        <li class="nav-item"><a href="#">Home</a></li>
+                        <li class="nav-item"><a href="homepage.html">Home</a></li>
                         <li class="nav-item"><a href="#">Profile</a></li>
                         
                     </ul>
@@ -36,6 +35,27 @@
     </header>
 
     
+   <body> 
+
+    <section id="profileSection">
+        <h1 id="userName"></h1>
+        <img id="userAvatar" alt="User Avatar">
+        
+        <h2 id="userEmail"></h2>
+
+        <h2 id="userCredits"></h2>
+        
+
+        <h2>Listings</h2>
+        <ul id="userListings"></ul>
+        
+        <h2>Bids</h2>
+        <ul id="userBids"></ul>
+    </section>
+
+
+    </body>
+
 
     <footer>
         <div class="container">
@@ -43,10 +63,21 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!---Script-->
+<script>
+    // JavaScript code for handling hamburger button click
+    document.addEventListener('DOMContentLoaded', function () {
+        const hamburgerButton = document.getElementById('hamburger');
+        const navUl = document.getElementById('nav-ul');
+    
+        hamburgerButton.addEventListener('click', function () {
+            // Toggle the 'show' class on the nav-ul to display or hide the mobile menu
+            navUl.classList.toggle('show');
+        });
+    });
+    </script>
 
 
 
-</body>
 
 </html>

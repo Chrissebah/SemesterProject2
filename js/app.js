@@ -1,28 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Declare jwtToken in this scope
     let jwtToken = localStorage.getItem('jwtToken');
     const itemsPerPage = 10;
     let currentPage = 1;
 
-    // Fetch data from the API
     fetchAuctionListings(currentPage);
 
-    // Function to fetch auction listings
     function fetchAuctionListings(page) {
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
 
-        fetch('https://api.noroff.dev/api/v1/auction/listings')
-            .then(response => response.json())
+        fetch('https://api.noroff.dev/api/v1/auction/listings', {
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => displayAuctionListings(data.slice(start, end)))
             .catch(error => console.error('Error fetching data:', error));
     }
 
-    // Function to display auction listings
     function displayAuctionListings(listings) {
         const auctionListingsContainer = document.getElementById('auctionListings');
 
-        // Check if there are listings to display
         if (listings && listings.length > 0) {
             const listingsHTML = listings.map(listing => `
                 <a href="auction-details.html?id=${listing.id}" class="auction-item-link">
@@ -37,18 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             auctionListingsContainer.innerHTML = listingsHTML;
 
-            // Show the "Load More" button if there are more items
             const loadMoreButton = document.getElementById('loadMoreButton');
             loadMoreButton.style.display = listings.length === itemsPerPage ? 'block' : 'none';
         } else {
             auctionListingsContainer.innerHTML = '<p>No auction listings available. Click again to go back to start.</p>';
-
-            // Reset to the first page when no more items to load
             currentPage = 1;
         }
     }
 
-    // Event listener for "Load More" button
     const loadMoreButton = document.getElementById('loadMoreButton');
     loadMoreButton.addEventListener('click', function () {
         currentPage++;
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'index.html';
     });
 
-    // Declare createPostButton in the appropriate scope
     const createPostButton = document.getElementById('createPostButton');
+    createPostButton.addEventListener('click', () => {
+        openCreatePostModal();
+    });
 
-    // Function to open the create post modal
     function openCreatePostModal() {
         const modal = document.getElementById('createPostModal');
 
-        // Ensure the modal element exists
         if (!modal) {
             console.error('Create Post Modal not found');
             return;
@@ -86,54 +86,54 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'none';
         });
 
-        // Get the create button and add a click event listener
         const createBtn = modal.querySelector('.create');
         createBtn.addEventListener('click', () => {
-            const newPostData = {
+            const newAuctionData = {
                 title: document.getElementById('postTitle').value,
-                body: document.getElementById('postBody').value,
-                tags: document.getElementById('postTags').value.split(','),
-                media: document.getElementById('postMedia').value,
+                description: document.getElementById('postBody').value || null,
+                tags: document.getElementById('postTags').value.split(',').filter(tag => tag.trim()) || [],
+                media: document.getElementById('postMedia').value.split(',').map(url => url.trim()) || [],
+                endsAt: new Date(document.getElementById('postEndsAt').value).toISOString(),
             };
 
-            // Send a POST request to create a new post
+            console.log('New Auction Data:', newAuctionData);
+
             fetch('https://api.noroff.dev/api/v1/auction/listings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${jwtToken}`,
                 },
-                body: JSON.stringify(newPostData),
+                body: JSON.stringify(newAuctionData),
             })
-            .then((response) => {
-                if (response.ok) {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response Data:', data);
                     modal.style.display = 'none';
                     clearCreatePostForm();
-                    console.log('Post created successfully');
-                    window.location.reload();
-                } else {
-                    console.error('Failed to create post:', response.status);
-                }
-            })
-            .catch((error) => {
-                console.error('An error occurred:', error);
-            });
+                    console.log('Auction listing created successfully');
+                
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error.message);
+                    console.log('Request Payload:', JSON.stringify(newAuctionData, null, 2));
+                    console.log('Response Status:', error?.response?.status);
+                    console.log('Response Data:', error?.response?.data);
+                    console.log('Full Error:', error);
+                });
         });
     }
-
-    // Function to clear the create post form
-    function clearCreatePostForm() {
-        document.getElementById('createPostForm').reset();
-    }
-
-    document.getElementById('createPostButton').addEventListener('click', () => {
-        openCreatePostModal();
-    });
 
     function clearCreatePostForm() {
         document.getElementById('postTitle').value = '';
         document.getElementById('postBody').value = '';
         document.getElementById('postTags').value = '';
         document.getElementById('postMedia').value = '';
+        document.getElementById('postEndsAt').value = '';
     }
 });

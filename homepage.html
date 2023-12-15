@@ -22,7 +22,7 @@
             <div class="buttons-container">
                 <ul class="nav-ul" id="nav-ul">
                     <li class="nav-item"><a href="#">Home</a></li>
-                    <li class="nav-item"><a href="#">Profile</a></li>
+                    <li class="nav-item"><a href="profile.html">Profile</a></li>
                     
                 </ul>
                 <div id="credits-container" class="credits-container"></div>
@@ -48,12 +48,19 @@
             <form id="createPostForm">
                 <label for="postTitle">Title:</label>
                 <input type="text" id="postTitle" name="postTitle" required>
+                
                 <label for="postBody">Body:</label>
                 <textarea id="postBody" name="postBody" required></textarea>
-                <label for="postTags">Start Price (nok)</label>
-                <input type="text" id="postTags" name="postTags">
-                <label for="postMedia">Media URL:</label>
+                
+                <label for="postMedia">Media URLs (comma-separated):</label>
                 <input type="text" id="postMedia" name="postMedia">
+                
+                <label for="postTags">Tags (comma-separated):</label>
+                <input type="text" id="postTags" name="postTags">
+                
+                <label for="postEndsAt">Ends At:</label>
+                <input type="datetime-local" id="postEndsAt" name="postEndsAt" required>
+                
                 <button type="button" class="cancel">Cancel</button>
                 <button type="button" class="create">Create</button>
             </form>

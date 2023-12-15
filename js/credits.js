@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (jwtToken) {
         // User is logged in, display the credits
-        const credits = 1000; // Assuming the user starts with 1000 credits
+        const credits = 1000; 
         creditsContainer.textContent = `Credits: ${credits}`;
     } else {
         // User is not logged in, hide the credits container
