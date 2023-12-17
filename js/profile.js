@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Update the DOM with the fetched profile information
                 userNameElement.textContent = profileData.name;
                 userAvatarElement.src = profileData.avatar || '/images/placeholder.png';
+                userAvatarElement.style.width = '200px';
+                userAvatarElement.style.height = '200px';
                 userEmailElement.textContent = profileData.email;
                 userCreditsElement.textContent = profileData.credits;
                 userListingsElement.textContent = profileData.listings;

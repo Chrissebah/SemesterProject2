@@ -527,7 +527,7 @@ footer {
     }
 
     #hamburger {
-        display: block; /* Show the hamburger button in mobile view */
+        display: block;
     }
 
     .nav-ul {
@@ -549,4 +549,25 @@ footer {
     .nav-ul.show {
         display: flex; 
     }
+
+    main {
+        margin-top: 60px;
+    }
+
+    #auctionListings {
+        margin-top: 70px
+    }
+
+    #profileSection {
+        margin-top: 70px;
+    }
+
+    #profileSection h1, #profileSection h2 {
+        font-size: 18px;
+    }
+
+
+    
+   
+
 }
