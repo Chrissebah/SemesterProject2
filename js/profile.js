@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const userBidsElement = document.getElementById('userBids');
     const userEmailElement = document.getElementById('userEmail');
     const userCreditsElement = document.getElementById('userCredits');
+    const loginButton = document.getElementById('loginButton');
+    const registerButton = document.getElementById('registerButton');
+    const profileMessage = document.getElementById('profileMessage');
 
     logoutButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -24,23 +27,27 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(profileData => {
                 // Update the DOM with the fetched profile information
                 userNameElement.textContent = profileData.name;
-
                 userAvatarElement.src = profileData.avatar || '/images/placeholder.png';
-
                 userEmailElement.textContent = profileData.email;
-
                 userCreditsElement.textContent = profileData.credits;
-
                 userListingsElement.textContent = profileData.listings;
-                
 
                 // Additional logic for displaying other information when i find out
-                
-
             })
             .catch(error => console.error('Error fetching user profile:', error));
     } else {
         console.error('jwtToken is not available or null.');
+        // Add margin-top style to the content shown in the else block
+        loginButton.style.marginTop = '20px';
+        registerButton.style.marginTop = '5px';
+        profileMessage.style.marginTop = '5px';
+        // Show login and register buttons
+        loginButton.style.display = 'block';
+        registerButton.style.display = 'block';
+        console.log('Setting profile message text.');
+        profileMessage.textContent = 'Login or register to view your profile.';
+        //hide the section with text
+        profileSection.style.display = 'none';
     }
 
     // Function to fetch user profile information

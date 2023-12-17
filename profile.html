@@ -13,6 +13,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,500;1,700&display=swap"
         rel="stylesheet">
     <title>Your Profile</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #loginButton,
+        #registerButton,
+        #profileMessage {
+            display: none;
+        }
+
+        #profileSection {
+            text-align: center;
+        }
+
+        #profileMessage {
+        display: block; 
+        margin-top: 5px; 
+        font-size: 24px;
+}
+    </style>
 </head>
 
     <header>
@@ -36,6 +62,11 @@
 
     
    <body> 
+
+    
+    <button id="loginButton" style="display: none">Login</button>
+    <button id="registerButton" style="display: none">Register</button>
+    <p id="profileMessage" style="color: red;"></p>
 
     <section id="profileSection">
         <h1 id="userName"></h1>
