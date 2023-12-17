@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching user profile:', error));
     } else {
         console.error('jwtToken is not available or null.');
-        // Add margin-top style to the content shown in the else block
         loginButton.style.marginTop = '20px';
         registerButton.style.marginTop = '5px';
         profileMessage.style.marginTop = '5px';
