@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const auctionDetailsContainer = document.getElementById('auctionDetails');
     const bidAmountInput = document.getElementById('bidAmount');
-    const bidButton = document.getElementById('bidButton');
+    let auctionId;
 
-    // Function to display auction details
     function displayAuctionDetails(auction) {
+        console.log('Adding event listener to bid button');
         if (auction) {
             const detailsHTML = `
                 <h1>${auction.title}</h1>
@@ -24,14 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             auctionDetailsContainer.innerHTML = detailsHTML;
 
-            // Add event listener for the bid button
-            bidButton.addEventListener('click', () => {
-                const bidAmount = parseInt(bidAmountInput.value);
-                if (!isNaN(bidAmount) && bidAmount >= 1) {
-                    // bid logic
-                    placeBid(bidAmount);
-                } else {
-                    alert('Please enter a valid bid amount.');
+            // Event listener for bid button
+            auctionDetailsContainer.addEventListener('click', function (event) {
+                if (event.target && event.target.id === 'bidButton') {
+                    handleBidButtonClick();
                 }
             });
         } else {
@@ -39,18 +35,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function handleBidButtonClick() {
+        console.log('Button clicked!');
+        const bidAmountInputValue = bidAmountInput.value.trim();
+    
+        console.log('bidAmountInputValue:', bidAmountInputValue);
+        console.log('typeof bidAmountInputValue:', typeof bidAmountInputValue);
+    
+        // Convert the input value to a number
+        const bidAmount = Number(bidAmountInputValue);
+    
+        console.log('Bid Amount:', bidAmount);
+        console.log('isNaN(bidAmount):', isNaN(bidAmount));
+        console.log('bidAmount >= 1:', bidAmount >= 1);
+    
+        if (!isNaN(bidAmount) && bidAmount >= 1) {
+            placeBid(bidAmount, auctionId);
+        } else {
+            alert('Please enter a valid bid amount.');
+        }
+    }
+    
+
     const logoutButton = document.getElementById('logoutButton');
     logoutButton.addEventListener('click', function (event) {
         event.preventDefault();
         window.location.href = 'index.html';
     });
 
-    // Get the auction ID from the URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const auctionId = urlParams.get('id');
+    auctionId = urlParams.get('id');
 
     if (auctionId) {
-        // Fetch data for the specified auction ID
         const apiUrl = `https://api.noroff.dev/api/v1/auction/listings/${auctionId}`;
 
         fetch(apiUrl)
@@ -61,9 +77,33 @@ document.addEventListener('DOMContentLoaded', function () {
         auctionDetailsContainer.innerHTML = '<p>No auction ID specified.</p>';
     }
 
-    // Function for placing a bid 
-    function placeBid(bidAmount) {
-        // logic to place a bid
-        alert(`Bid placed successfully!`);
+    function placeBid(bidAmount, auctionId) {
+        console.log('Placing bid', bidAmount, 'for auction ID:', auctionId);
+        const bidUrl = 'https://api.noroff.dev/api/v1/auction/bids';
+
+        const bidData = {
+            amount: bidAmount,
+        };
+
+        fetch(bidUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bidData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to place bid');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(`Bid placed successfully for auction ID ${auctionId} with amount ${bidAmount}!`);
+            })
+            .catch(error => {
+                console.error('Error placing bid:', error);
+                alert('Failed to place bid. Please try again.');
+            });
     }
 });

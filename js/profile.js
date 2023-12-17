@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     logoutButton.addEventListener('click', function (event) {
         event.preventDefault();
-        // Redirect to the login page or perform the logout logic
+        
         window.location.href = 'index.html';
     });
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 userCreditsElement.textContent = profileData.credits;
                 userListingsElement.textContent = profileData.listings;
 
-                // Additional logic for displaying other information when i find out
+            
             })
             .catch(error => console.error('Error fetching user profile:', error));
     } else {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                // Assuming the API response contains the user's profile data
+                
                 return data;
             });
     }
