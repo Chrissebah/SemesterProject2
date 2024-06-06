@@ -10,10 +10,7 @@ finding out what information was vital to pull from the API was very difficult s
 
 ## Built With
 
-![image](https://github.com/Chrissebah/SemesterProject-1/assets/19626783/52b602f7-a7fe-4bbb-8167-aa1516d2037d)
-![image](https://github.com/Chrissebah/SemesterProject-1/assets/19626783/14208c76-3b50-4fba-82e4-a20e2824f50b)
-![image](https://github.com/Chrissebah/SemesterProject-1/assets/19626783/2f9db9f0-3997-453b-ab65-d6bdcadca8d6)
-![image](https://github.com/Chrissebah/SemesterProject-1/assets/19626783/98aea41e-7934-4cb2-8071-6a7ab7f3aed9)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 ## Deployed Website
 https://resplendent-dasik-086adc.netlify.app
